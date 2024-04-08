@@ -5,7 +5,7 @@ type TimerProps = {
 const Timer = ({ value }: TimerProps) => {
   return (
     <div>
-      <p>{value}</p>
+      <p className="text-2xl font-bold ">{value}</p>
     </div>
   );
 };
