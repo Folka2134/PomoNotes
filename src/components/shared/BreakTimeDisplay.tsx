@@ -1,14 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import Timer from "./Timer";
 
-const DateTimeDisplay = ({ hours, minutes, seconds }: any) => {
+const BreakTimeDisplay = ({ hours, minutes, seconds }: any) => {
   return (
     <div className="flex">
       <Card className="bg-[#111114] text-white">
         <CardHeader>
-          <CardTitle className="">Focus time</CardTitle>
+          <CardTitle className="">Break time</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-center gap-2 text-purple-700">
+        <CardContent className="flex items-center justify-center gap-2">
           <Timer value={hours} />:
           <Timer value={minutes} />:
           <Timer value={seconds} />
@@ -18,4 +18,4 @@ const DateTimeDisplay = ({ hours, minutes, seconds }: any) => {
   );
 };
 
-export default DateTimeDisplay;
+export default BreakTimeDisplay;
