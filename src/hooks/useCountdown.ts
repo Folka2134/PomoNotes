@@ -11,7 +11,7 @@ export const useCountdown = (targetDate: any) => {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [countDownDate])
+  }, [targetDate])
 
   return getReturnValues(countdownDuration)
 }
