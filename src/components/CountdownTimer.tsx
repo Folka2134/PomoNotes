@@ -1,15 +1,26 @@
 import { useCountdown } from "@/hooks/useCountdown";
-import ExpiredTimeDisplay from "./shared/ExpiredTimeDisplay";
 import DateTimeDisplay from "./shared/DateTimeDisplay";
+import BreakTimeDisplay from "./shared/BreakTimeDisplay";
 
-const CountdownTimer = ({ targetDate }: any) => {
-  const [hours, minutes, seconds] = useCountdown(targetDate);
+const CountdownTimer = ({ targetDate, breakTime }: any) => {
+  const [workHours, workMinutes, workSeconds] = useCountdown(targetDate);
+  const [breakHours, breakMinutes, breakSeconds] = useCountdown(breakTime);
 
-  if (hours + minutes + seconds === 0) {
-    return <ExpiredTimeDisplay />;
+  if (workHours + workMinutes + workSeconds <= 0) {
+    return (
+      <BreakTimeDisplay
+        hours={breakHours}
+        minutes={breakMinutes}
+        seconds={breakSeconds}
+      />
+    );
   } else {
     return (
-      <DateTimeDisplay hours={hours} minutes={minutes} seconds={seconds} />
+      <DateTimeDisplay
+        hours={workHours}
+        minutes={workMinutes}
+        seconds={workSeconds}
+      />
     );
   }
 };
