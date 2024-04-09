@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
 
-export const useCountdown = (targetDate: any) => {
-  const countDownDate = new Date(targetDate).getTime();
-
-  const [countdownDuration, setCountdownDuration] = useState(countDownDate - new Date().getTime());
+export const useCountdown = (targetDuration: number, startCountdown: boolean) => {
+  const [countdownDuration, setCountdownDuration] = useState(targetDuration);
+  const [isCountdownFinished, setIsCountdownFinished] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdownDuration(countDownDate - new Date().getTime())
-    }, 1000)
+    if (startCountdown && !isCountdownFinished) {
+      const interval = setInterval(() => {
+        setCountdownDuration(prevDuration => {
+          if (prevDuration <= 0) {
+            // Stop the countdown
+            setIsCountdownFinished(true);
+            // Reset the countdown
+            return targetDuration;
+          } else {
+            return prevDuration - 1000;
+          }
+        });
+      }, 1000);
 
-    return () => clearInterval(interval)
-  }, [targetDate])
+      return () => clearInterval(interval);
+    }
+  }, [startCountdown, targetDuration, isCountdownFinished]);
 
-  return getReturnValues(countdownDuration)
-}
+  return [...getReturnValues(countdownDuration), isCountdownFinished];
+};
 
 const getReturnValues = (countDown: number) => {
   // calculate time left
