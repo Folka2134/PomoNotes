@@ -1,29 +1,27 @@
 import { useEffect, useState } from "react";
 
-export const useCountdown = (targetDuration: number, startCountdown: boolean) => {
+export const useCountdown = (targetDuration: number, startCountdown: boolean, setStartCountDown: any) => {
   const [countdownDuration, setCountdownDuration] = useState(targetDuration);
-  const [isCountdownFinished, setIsCountdownFinished] = useState(false);
 
   useEffect(() => {
-    if (startCountdown && !isCountdownFinished) {
+    if (startCountdown) {
       const interval = setInterval(() => {
         setCountdownDuration(prevDuration => {
-          if (prevDuration <= 0) {
-            // Stop the countdown
-            setIsCountdownFinished(true);
-            // Reset the countdown
-            return targetDuration;
-          } else {
+          if (prevDuration > 0) {
             return prevDuration - 1000;
+          } else {
+            clearInterval(interval);
+            setStartCountDown(false);
+            return targetDuration; // Reset the timer
           }
         });
       }, 1000);
-
+  
       return () => clearInterval(interval);
     }
-  }, [startCountdown, targetDuration, isCountdownFinished]);
+  }, [startCountdown, targetDuration]);
 
-  return [...getReturnValues(countdownDuration), isCountdownFinished];
+  return [...getReturnValues(countdownDuration)];
 };
 
 const getReturnValues = (countDown: number) => {

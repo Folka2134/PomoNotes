@@ -10,13 +10,13 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
   const [workHours, workMinutes, workSeconds] = useCountdown(
     focusTime,
     startFocusCountdown,
+    setStartFocusCountdown,
   );
   const [breakHours, breakMinutes, breakSeconds] = useCountdown(
     breakTime,
     startBreakCountdown,
+    setStartBreakCountdown,
   );
-
-  console.log(workHours, workMinutes, workSeconds);
 
   const startFocusTimer = () => {
     setStartFocusCountdown(true);
@@ -26,14 +26,10 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
     setStartBreakCountdown(true);
   };
 
-  // const pauseTimer = () => {
-  //   setStartCountdown(false);
-  // };
+  const pauseTimer = () => {
+    setStartFocusCountdown(false);
+  };
 
-  // const resetTimer = () => {
-  //   setStartCountdown(false);
-  //   setResetCountdown((prev) => prev + 1);
-  // };
   return (
     <div>
       <DateTimeDisplay
@@ -41,7 +37,11 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
         minutes={workMinutes}
         seconds={workSeconds}
       />
-      <button onClick={startFocusTimer}>Play</button>
+      {startFocusCountdown ? (
+        <button onClick={pauseTimer}>Pause</button>
+      ) : (
+        <button onClick={startFocusTimer}>Play</button>
+      )}
 
       <BreakTimeDisplay
         hours={breakHours}
