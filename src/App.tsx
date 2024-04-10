@@ -9,8 +9,8 @@ function App() {
 
   // const NOW_IN_MS = new Date().getTime();
 
-  const focusTime = 10 * 1000;
-  const breakTime = 15 * 1000;
+  const focusTime = 2 * 1000;
+  const breakTime = 2 * 1000;
 
   return (
     <div className="mt-24 flex justify-center lg:mt-52">
