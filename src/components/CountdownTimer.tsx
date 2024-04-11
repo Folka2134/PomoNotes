@@ -6,16 +6,19 @@ import { useState } from "react";
 const CountdownTimer = ({ focusTime, breakTime }: any) => {
   const [startFocusCountdown, setStartFocusCountdown] = useState(false);
   const [startBreakCountdown, setStartBreakCountdown] = useState(false);
+  const [displayBreakTime, setDisplayBreakTime] = useState(false);
 
   const [workHours, workMinutes, workSeconds] = useCountdown(
     focusTime,
     startFocusCountdown,
     setStartFocusCountdown,
+    setDisplayBreakTime,
   );
   const [breakHours, breakMinutes, breakSeconds] = useCountdown(
     breakTime,
     startBreakCountdown,
     setStartBreakCountdown,
+    setDisplayBreakTime,
   );
 
   const startFocusTimer = () => {
@@ -31,24 +34,31 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
   };
 
   return (
-    <div>
-      <DateTimeDisplay
-        hours={workHours}
-        minutes={workMinutes}
-        seconds={workSeconds}
-      />
-      {startFocusCountdown ? (
-        <button onClick={pauseTimer}>Pause</button>
+    <div className="justbet flex">
+      {displayBreakTime ? (
+        <>
+          <BreakTimeDisplay
+            hours={breakHours}
+            minutes={breakMinutes}
+            seconds={breakSeconds}
+          />
+          <button onClick={startBreakTimer}>Play</button>
+        </>
       ) : (
-        <button onClick={startFocusTimer}>Play</button>
+        <>
+          <DateTimeDisplay
+            hours={workHours}
+            minutes={workMinutes}
+            seconds={workSeconds}
+          />
+          {startFocusCountdown ? (
+            <button onClick={pauseTimer}>Pause</button>
+          ) : (
+            <button onClick={startFocusTimer}>Play</button>
+          )}
+        </>
       )}
-
-      <BreakTimeDisplay
-        hours={breakHours}
-        minutes={breakMinutes}
-        seconds={breakSeconds}
-      />
-      <button onClick={startBreakTimer}>Play</button>
+      <button>Skip</button>
     </div>
   );
 };

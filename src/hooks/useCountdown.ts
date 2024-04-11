@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useCountdown = (targetDuration: number, startCountdown: boolean, setStartCountDown: any) => {
+export const useCountdown = (targetDuration: number, startCountdown: boolean, setStartCountDown: any, setDisplayBreakTime: any) => {
   const [countdownDuration, setCountdownDuration] = useState(targetDuration);
 
   useEffect(() => {
@@ -8,10 +8,13 @@ export const useCountdown = (targetDuration: number, startCountdown: boolean, se
       const interval = setInterval(() => {
         setCountdownDuration(prevDuration => {
           if (prevDuration > 0) {
+            console.log(prevDuration);
+            
             return prevDuration - 1000;
           } else {
             clearInterval(interval);
             setStartCountDown(false);
+            setDisplayBreakTime((prev : boolean) => !prev)
             return targetDuration; // Reset the timer
           }
         });
