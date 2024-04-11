@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 export const useCountdown = (targetDuration: number, startCountdown: boolean, setStartCountDown: any, setDisplayBreakTime: any) => {
   const [countdownDuration, setCountdownDuration] = useState(targetDuration);
 
+  // Reset countdownDuration when startCountdown changes
+  useEffect(() => {
+    setCountdownDuration(targetDuration);
+  }, [startCountdown, targetDuration]);
+
   useEffect(() => {
     if (startCountdown) {
       const interval = setInterval(() => {

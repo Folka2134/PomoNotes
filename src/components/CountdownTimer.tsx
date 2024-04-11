@@ -33,8 +33,14 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
     setStartFocusCountdown(false);
   };
 
+  const skipTimer = () => {
+    setStartFocusCountdown(false);
+    setStartBreakCountdown(false);
+    setDisplayBreakTime((prev) => !prev);
+  };
+
   return (
-    <div className="justbet flex">
+    <div className="flex flex-col">
       {displayBreakTime ? (
         <>
           <BreakTimeDisplay
@@ -58,7 +64,7 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
           )}
         </>
       )}
-      <button>Skip</button>
+      <button onClick={skipTimer}>Skip</button>
     </div>
   );
 };
