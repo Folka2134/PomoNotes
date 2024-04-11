@@ -13,8 +13,6 @@ export const useCountdown = (targetDuration: number, startCountdown: boolean, se
       const interval = setInterval(() => {
         setCountdownDuration(prevDuration => {
           if (prevDuration > 0) {
-            console.log(prevDuration);
-            
             return prevDuration - 1000;
           } else {
             clearInterval(interval);

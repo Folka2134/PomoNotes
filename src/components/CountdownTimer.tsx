@@ -29,9 +29,9 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
     setStartBreakCountdown(true);
   };
 
-  const pauseTimer = () => {
-    setStartFocusCountdown(false);
-  };
+  // const pauseTimer = () => {
+  //   setStartFocusCountdown(false);
+  // };
 
   const skipTimer = () => {
     setStartFocusCountdown(false);
@@ -57,9 +57,7 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
             minutes={workMinutes}
             seconds={workSeconds}
           />
-          {startFocusCountdown ? (
-            <button onClick={pauseTimer}>Pause</button>
-          ) : (
+          {!startFocusCountdown && (
             <button onClick={startFocusTimer}>Play</button>
           )}
         </>
