@@ -47,7 +47,7 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center">
       {displayBreakTime ? (
         <BreakTimeDisplay
           hours={breakHours}
@@ -61,7 +61,7 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
           seconds={workSeconds}
         />
       )}
-      <div className="mt-1 flex justify-evenly">
+      <div className="mt-1 flex gap-6">
         {displayBreakTime ? (
           <button onClick={startBreakTimer}>Play</button>
         ) : (
