@@ -3,6 +3,7 @@ import DateTimeDisplay from "./shared/DateTimeDisplay";
 import BreakTimeDisplay from "./shared/BreakTimeDisplay";
 import { useState } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import PomoCounter from "./PomoCounter";
 
 const CountdownTimer = ({ focusTime, breakTime }: any) => {
   const [startFocusCountdown, setStartFocusCountdown] = useState(false);
@@ -69,6 +70,7 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
         </>
       )}
       <button onClick={skipTimer}>Skip</button>
+      <PomoCounter pomodoro={pomodoro} setPomodoro={setPomodoro} />
     </div>
   );
 };
