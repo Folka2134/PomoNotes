@@ -2,23 +2,29 @@ import { useCountdown } from "@/hooks/useCountdown";
 import DateTimeDisplay from "./shared/DateTimeDisplay";
 import BreakTimeDisplay from "./shared/BreakTimeDisplay";
 import { useState } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const CountdownTimer = ({ focusTime, breakTime }: any) => {
   const [startFocusCountdown, setStartFocusCountdown] = useState(false);
   const [startBreakCountdown, setStartBreakCountdown] = useState(false);
   const [displayBreakTime, setDisplayBreakTime] = useState(false);
+  const [pomodoro, setPomodoro] = useLocalStorage("pomodoroCount", 0);
 
   const [workHours, workMinutes, workSeconds] = useCountdown(
+    "focusTime",
     focusTime,
     startFocusCountdown,
     setStartFocusCountdown,
     setDisplayBreakTime,
+    setPomodoro,
   );
   const [breakHours, breakMinutes, breakSeconds] = useCountdown(
+    "breakTime",
     breakTime,
     startBreakCountdown,
     setStartBreakCountdown,
     setDisplayBreakTime,
+    setPomodoro,
   );
 
   const startFocusTimer = () => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useCountdown = (targetDuration: number, startCountdown: boolean, setStartCountDown: any, setDisplayBreakTime: any) => {
+export const useCountdown = (CountDownType: String, targetDuration: number, startCountdown: boolean, setStartCountDown: any, setDisplayBreakTime: any, setPomodoro: any) => {
   const [countdownDuration, setCountdownDuration] = useState(targetDuration);
 
   // Reset countdownDuration when startCountdown changes
@@ -18,6 +18,9 @@ export const useCountdown = (targetDuration: number, startCountdown: boolean, se
             clearInterval(interval);
             setStartCountDown(false);
             setDisplayBreakTime((prev : boolean) => !prev)
+            if (CountDownType === "focusTime") {
+              setPomodoro((prev: number) => prev + 1);
+            }
             return targetDuration; // Reset the timer
           }
         });
