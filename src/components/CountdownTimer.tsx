@@ -1,7 +1,7 @@
 import { useCountdown } from "@/hooks/useCountdown";
 import DateTimeDisplay from "./shared/DateTimeDisplay";
 import BreakTimeDisplay from "./shared/BreakTimeDisplay";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import PomoCounter from "./PomoCounter";
 
@@ -45,6 +45,15 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
     setStartBreakCountdown(false);
     setDisplayBreakTime((prev) => !prev);
   };
+
+  useEffect(() => {
+    const today = new Date().toDateString();
+
+    if (localStorage.getItem("lastPomodoroDay") !== today) {
+      setPomodoro(0);
+      localStorage.setItem("lastPomodoroDay", today);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
