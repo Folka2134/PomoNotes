@@ -1,8 +1,4 @@
-import React from "react";
-
 const PomoCounter = ({ pomodoro, setPomodoro }: any) => {
-  console.log(pomodoro);
-
   return (
     <div className="mt-5 flex flex-col items-center text-xl">
       <div>
