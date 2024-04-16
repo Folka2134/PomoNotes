@@ -49,27 +49,26 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
   return (
     <div className="flex flex-col">
       {displayBreakTime ? (
-        <>
-          <BreakTimeDisplay
-            hours={breakHours}
-            minutes={breakMinutes}
-            seconds={breakSeconds}
-          />
-          <button onClick={startBreakTimer}>Play</button>
-        </>
+        <BreakTimeDisplay
+          hours={breakHours}
+          minutes={breakMinutes}
+          seconds={breakSeconds}
+        />
       ) : (
-        <>
-          <DateTimeDisplay
-            hours={workHours}
-            minutes={workMinutes}
-            seconds={workSeconds}
-          />
-          {!startFocusCountdown && (
-            <button onClick={startFocusTimer}>Play</button>
-          )}
-        </>
+        <DateTimeDisplay
+          hours={workHours}
+          minutes={workMinutes}
+          seconds={workSeconds}
+        />
       )}
-      <button onClick={skipTimer}>Skip</button>
+      <div className="mt-1 flex justify-evenly">
+        {displayBreakTime ? (
+          <button onClick={startBreakTimer}>Play</button>
+        ) : (
+          <button onClick={startFocusTimer}>Play</button>
+        )}
+        <button onClick={skipTimer}>Skip</button>
+      </div>
       <PomoCounter pomodoro={pomodoro} setPomodoro={setPomodoro} />
     </div>
   );
