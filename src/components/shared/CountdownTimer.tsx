@@ -1,6 +1,6 @@
 import { useCountdown } from "@/hooks/useCountdown";
-import DateTimeDisplay from "./shared/DateTimeDisplay";
-import BreakTimeDisplay from "./shared/BreakTimeDisplay";
+import DateTimeDisplay from "./DateTimeDisplay";
+import BreakTimeDisplay from "./BreakTimeDisplay";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import PomoCounter from "./PomoCounter";
@@ -10,6 +10,8 @@ const CountdownTimer = ({ focusTime, breakTime }: any) => {
   const [startBreakCountdown, setStartBreakCountdown] = useState(false);
   const [displayBreakTime, setDisplayBreakTime] = useState(false);
   const [pomodoro, setPomodoro] = useLocalStorage("pomodoroCount", 0);
+
+  console.log(focusTime, breakTime);
 
   const [workHours, workMinutes, workSeconds] = useCountdown(
     "focusTime",
